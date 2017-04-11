@@ -86,6 +86,19 @@ public class OpenPgpApi {
 
     /**
      * Sign text or binary data resulting in a detached signature.
+     * No OutputStream necessary for ACTION_SSH_AUTH
+     * The detached signature is returned separately in RESULT_DETACHED_SIGNATURE.
+     * 
+     * required extras:
+     * long          EXTRA_SIGN_KEY_ID           (key id of signing key)
+     * 
+     * returned extras:
+     * byte[]        RESULT_DETACHED_SIGNATURE
+     */
+    public static final String ACTION_SSH_AUTH = "org.openintents.openpgp.action.SSH_AUTH";
+
+    /**
+     * Sign text or binary data resulting in a detached signature.
      * No OutputStream necessary for ACTION_DETACHED_SIGN (No magic pre-processing like in ACTION_CLEARTEXT_SIGN)!
      * The detached signature is returned separately in RESULT_DETACHED_SIGNATURE.
      * 
@@ -228,8 +241,10 @@ public class OpenPgpApi {
     // OpenPGP Radix-64, 33 percent overhead compared to binary, see http://tools.ietf.org/html/rfc4880#page-53)
     public static final String EXTRA_REQUEST_ASCII_ARMOR = "ascii_armor";
 
-    // ACTION_DETACHED_SIGN
+    // ACTION_DETACHED_SIGN, SSH_AUTH
     public static final String RESULT_DETACHED_SIGNATURE = "detached_signature";
+
+    // ACTION_DETACHED_SIGN
     public static final String RESULT_SIGNATURE_MICALG = "signature_micalg";
 
     // ENCRYPT, SIGN_AND_ENCRYPT
